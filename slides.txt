@@ -1,0 +1,135 @@
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=plain
+
+ __                  _   _                   _
+ / _|                | | (_)                 | |
+| |_ _   _ _ __   ___| |_ _  ___  _ __   __ _| |
+|  _| | | | '_ \ / __| __| |/ _ \| '_ \ / _` | |
+| | | |_| | | | | (__| |_| | (_) | | | | (_| | |
+|_|  \__,_|_| |_|\___\__|_|\___/|_| |_|\__,_|_|
+                                                     _               _
+                                                    (_)             (_)
+ _ __  _ __ ___   __ _ _ __ __ _ _ __ ___  _ __ ___  _ _ __   __ _   _ _ __
+| '_ \| '__/ _ \ / _` | '__/ _` | '_ ` _ \| '_ ` _ \| | '_ \ / _` | | | '_ \
+| |_) | | | (_) | (_| | | | (_| | | | | | | | | | | | | | | | (_| | | | | | |
+| .__/|_|  \___/ \__, |_|  \__,_|_| |_| |_|_| |_| |_|_|_| |_|\__, | |_|_| |_|
+| |               __/ |                                       __/ |
+|_|              |___/                                       |___/
+   _                                _       _
+  (_)                              (_)     | |
+   _  __ ___   ____ _ ___  ___ _ __ _ _ __ | |_
+  | |/ _` \ \ / / _` / __|/ __| '__| | '_ \| __|
+  | | (_| |\ V / (_| \__ \ (__| |  | | |_) | |_
+  | |\__,_| \_/ \__,_|___/\___|_|  |_| .__/ \__|
+ _/ |                                | |
+|__/                                 |_|
+
+            nathaniel smith
+                     cmgdst
+                 2012-05-30
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=plain
+
+                           _
+                           | |
+  __ _  __ _  ___ _ __   __| | __ _
+ / _` |/ _` |/ _ \ '_ \ / _` |/ _` |
+| (_| | (_| |  __/ | | | (_| | (_| |
+ \__,_|\__, |\___|_| |_|\__,_|\__,_|
+        __/ |
+       |___/
+
+ * intro
+ * Functional Programming techniques for core JS
+ * FP with Underscore.js
+ * Oliver Steele's Functional Javascript
+ * Functional languages that compile to JS
+  * ClojureScript
+  * ParenScript
+  * Roy
+ * Q&A
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=plain
+ _       _
+(_)     | |
+ _ _ __ | |_ _ __ ___
+| | '_ \| __| '__/ _ \
+| | | | | |_| | | (_) |
+|_|_| |_|\__|_|  \___/
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=javascript
+
+// FP techniques in core Javascript
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=javascript
+
+// FP with Underscore.js
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=javascript
+
+// Functional Javascript
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=markdown
+
+# Functional languages that compile to Javascript
+
+ * Clojurescript
+ * ParenScript
+ * Roy
+ * (haskell, ocaml, scheme...)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=markdown
+
+# clojurescript
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=markdown
+
+# parenscript
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=markdown
+
+# roy
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=markdown
+
+                       _   _                ___
+                      | | (_)              |__ \
+  __ _ _   _  ___  ___| |_ _  ___  _ __  ___  ) |
+ / _` | | | |/ _ \/ __| __| |/ _ \| '_ \/ __|/ /
+| (_| | |_| |  __/\__ \ |_| | (_) | | | \__ \_|
+ \__, |\__,_|\___||___/\__|_|\___/|_| |_|___(_)
+    | |
+    |_|
+
+thanks!
