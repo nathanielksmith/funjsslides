@@ -44,10 +44,9 @@ POSERO>> set ft=plain
        |___/
 
  * intro
+ * The hard way
  * Functional Programming techniques for core JS
- * FP with Underscore.js
- * Oliver Steele's Functional Javascript
- * Functional languages that compile to JS
+ * The easy way (func langs that compile to JS)
   * ClojureScript
   * ParenScript
   * Roy
@@ -232,24 +231,66 @@ POSERO>> set ft=javascript
 
 // Point free style
 
-Function.prototype.$ = function() {
-    return this.apply(null, arguments)
-}
+/* in haskell...
+
+-- naive
+sum (x:xs) = x + sum xs
+sum [] = 0
+
+-- oh, i can use a fold
+sum xs = foldr (+) 0 xs
+
+-- xs is redundant thanks to partial application
+sum  = foldr (+) 0
+
+we can do the same in js to happily avoid invocation of function(x){}!
+
+*/
 
 var negate = function(x) { return -1 * x }
 var abs = function(x) { return Math.abs(x) }
 var nums = [-1, 1, 2, 4, -4, -5]
 
-show( map.f().p(negate.c(abs)).$(nums) )
+var all_negative = function(array) { return map(array, negate.c(abs)) }
 
-show( foldl(nums, plus, 0) )
+show( all_negative(nums) )
+
+var all_negative_ = map.f().p(negate.c(abs))
+
+show( all_negative_(nums) )
 
 
+// again.
 
+var ceiling = Math.ceil
+var negate = function(x) { return -1 * x }
+var tan = Math.tan
+var cos = Math.cos
+var max = Math.max
 
+/*
 
+-- naive
+fn x = ceiling (negate (tan (cos (max 50 x))))
 
+*/
 
+var math = function(x) { return ceiling(negate(tan(cos(max(50, x))))) }
+
+show( math(49) )
+show( math(51) )
+
+/*
+
+-- awesome
+fn = ceiling . negate . tan . cos . max 50
+
+*/
+
+var math = ceiling.c(negate.c(tan.c(cos.c(max.p(50)))))
+
+show( math(49) )
+show( math(51) )
 
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -257,7 +298,23 @@ POSERO>> let b:posero_auto_next_line = 1
 POSERO>> let b:posero_push_all = 1
 POSERO>> set ft=javascript
 
-// FP with Underscore.js
+// just playing at this point
+
+var nums = [-1, 1, 2, 4, -4, -5]
+var add_two = plus
+var add_three = function(x,y,z) { return x + y + z }
+
+// sum
+show( foldl(nums, add_two, 0) )
+
+// but what if we wanted to add 1 to everything first?
+show( foldl(map(nums, add_two.p(1)), add_two, 0) )
+
+// we can do better.
+show( foldl(nums, add_three.p(1), 0) )
+
+show( foldl.f().p(0).p(add_three.p(1)
+
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 POSERO>> let b:posero_auto_next_line = 1
@@ -278,31 +335,11 @@ POSERO>> set ft=markdown
  * Roy
  * (haskell, ocaml, scheme...)
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-POSERO>> let b:posero_auto_next_line = 1
-POSERO>> let b:posero_push_all = 1
-POSERO>> set ft=markdown
-
-# clojurescript
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 POSERO>> let b:posero_auto_next_line = 1
 POSERO>> let b:posero_push_all = 1
-POSERO>> set ft=markdown
-
-# parenscript
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-POSERO>> let b:posero_auto_next_line = 1
-POSERO>> let b:posero_push_all = 1
-POSERO>> set ft=markdown
-
-# roy
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-POSERO>> let b:posero_auto_next_line = 1
-POSERO>> let b:posero_push_all = 1
-POSERO>> set ft=markdown
+POSERO>> set ft=plain
 
                        _   _                ___
                       | | (_)              |__ \
