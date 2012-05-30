@@ -64,12 +64,193 @@ POSERO>> set ft=plain
 | | | | | |_| | | (_) |
 |_|_| |_|\__|_|  \___/
 
+* scheme and self
+* anonymous functions play a huge role
+* functions are first class objects
+
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 POSERO>> let b:posero_auto_next_line = 1
 POSERO>> let b:posero_push_all = 1
 POSERO>> set ft=javascript
 
-// FP techniques in core Javascript
+// FP in core Javascript
+
+// The function object
+
+function f(a, b) { return a + b }
+var g = function (a, b) { return a + b } // but function is unnamed
+var t = function t(a,b) { return a +b } // named but verbose
+var z = new Function('a', 'b', 'return a+b') // but don't do this. bound to global scope, always.
+
+var f = function(a, b) { return a + b }
+console.log(f.length)
+console.log(f.toString())
+
+// nonstandard and bootleg
+var who = function who() { console.log(who.caller.toString()) }
+var what = function what() { who() }
+what()
+
+// nonstandard
+console.log((function(){}).name)
+console.log((function hi_there(){}).name)
+
+// the arguments object
+(function f(a, b) {
+    console.log(arguments.callee.toString())
+    console.log(arguments.length)
+    console.log(arguments.callee.length)
+    console.log(arguments)
+})(1,2,3)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=javascript
+
+// Basic recursion
+
+// just for our convenience, i've added these to run.js
+var show = function() { console.log.apply(this, arguments) }
+var map = function(array, f) { return _.map(array, f) }
+var foldl = function(array, f, c) { return _.foldl(a, f, c) }
+var foldr = function(array, f, c) { return _.foldr(a, f, c) }
+
+var t = function t(string) {
+    var args = _.toArray(arguments).slice(1) // discard string
+    if (string.indexOf('%s') < 0 || args.length == 0) {
+        return string
+    }
+    else {
+        string = string.replace('%s', args.shift())
+        args.unshift(string)
+        return t.apply({}, args)
+    }
+}
+
+console.log(t('i am %s, %s and %s'), 'orange', 'short', 'strange')
+
+String.prototype.format = function format() {
+    var copy = String(this)
+    var args = _.toArray(arguments)
+    if (copy.indexOf('%s') < 0 || args.length == 0) {
+        return copy
+    }
+    else {
+        replaced = copy.replace('%s', args.shift())
+        return this.format.apply(replaced, args)
+    }
+}
+
+console.log("I am %s and %s.".format('hale', 'grim'))
+var hello = "no more %s"
+console.log(hello.format('potatoes'))
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=javascript
+
+// composition
+
+Function.prototype.c = function(g) {
+    var f = this
+    return function() {
+        return f(g.apply(this, arguments)) 
+    }
+}
+
+var say_hi = function(name) { return 'hi, ' + name }
+var exclamation = function(str) { return str + '!' }
+
+console.log( say_hi.c(exclamation)('nate') )
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=javascript
+
+// partial application
+// (or schönfinkeling?)
+
+Function.prototype.p = function() {
+    var args = _.toArray(arguments)
+    var f = this
+    return function() {
+        var inner_args = _.toArray(arguments)
+        inner_args.unshift(args[0])
+        return f.apply(this, inner_args)
+    }
+}
+
+var f = function(a, b) { return a + ' ' + b }
+console.log(f.p("no more")('potatoes'))
+
+var g = f.p("no more")
+console.log( _.map(['potatoes', 'war', 'school'], g) )
+
+var add_four = function(a,b,c,d) { return a+b+c+d }
+var add_fifteen_to_two = add_four.p(6).p(9)
+
+console.log( add_fifteen_to_two(1, 1) )
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=javascript
+
+// flipping
+
+Function.prototype.f = function() {
+    var f = this
+    return function() {
+        var args = _.toArray(arguments)
+        return f.apply(this, args.reverse())
+    }
+}
+
+var div = function (a,b) { return a / b }
+
+console.log( div(1,2) )
+console.log( div.f()(1,2) )
+
+var cool_things = ['goats', 'cthulhu', "NODENS, LORD OF THE GREAT ABYSS"]
+var leet = function(x){return x.replace(/[oO]/g,'0').replace(/[tT]/g,'7')}
+
+console.log( map(cool_things, leet) )
+console.log( map.f()(leet, cool_things) )
+
+var leet_all_of_the_things = map.f().p(leet)
+
+console.log( leet_all_of_the_things(cool_things) )
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+POSERO>> let b:posero_auto_next_line = 1
+POSERO>> let b:posero_push_all = 1
+POSERO>> set ft=javascript
+
+// Point free style
+
+Function.prototype.$ = function() {
+    return this.apply(null, arguments)
+}
+
+var negate = function(x) { return -1 * x }
+var abs = function(x) { return Math.abs(x) }
+var nums = [-1, 1, 2, 4, -4, -5]
+
+show( map.f().p(negate.c(abs)).$(nums) )
+
+show( foldl(nums, plus, 0) )
+
+
+
+
+
+
+
+
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 POSERO>> let b:posero_auto_next_line = 1
