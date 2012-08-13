@@ -45,6 +45,7 @@ POSERO>> set ft=plain
 
  * intro
  * The hard way
+ * "Functional" library
  * Functional Programming techniques for core JS
  * The easy way (func langs that compile to JS)
   * ClojureScript

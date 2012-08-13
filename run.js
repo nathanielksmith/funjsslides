@@ -1,26 +1,45 @@
 #!/usr/bin/node
 
-var async = require('async');
 var _ = require('underscore');
 
-var acquire_monkey = function(id, callback) {
-    var monkies = [
-        {id:0, name:'hermann', friend:1},
-        {id:1, name:'harriet', friend:4},
-        {id:2, name:'joy', friend:5},
-        {id:3, name:'frederick', friend:6},
-        {id:4, name:'molly', friend:7},
-        {id:5, name:'hilma', friend:1},
-        {id:6, name:'william', friend:0},
-        {id:7, name:'geoffery', friend:8},
-        {id:8, name:'ted', friend:9},
-        {id:9, name:'tina', friend:2}
-    ];
-    _.defer(function() {
-        callback(_.find(monkies, function(m) { return m.id === id }))
-    })
+var id = function(x) { return x }
+var plus = function(x,y) { return x+y }
+var minus = function(x,y) { return x-y }
+var div = function(x,y) { return x / y }
+var mult = function(x,y) { return x * y }
+var show = function() { console.log.apply(this, arguments) }
+var map = function(a, f) { return _.map(a, f) }
+var foldl = function(a, f, c) { return _.foldl(a, f, c) }
+var foldr = function(a, f, c) { return _.foldr(a, f, c) }
+
+Function.prototype.$ = function() {
+    return this.apply(null, arguments)
 }
 
+Function.prototype.c = function(g) {
+    var f = this
+    return function() {
+        return f(g.apply(this, arguments)) 
+    }
+}
+
+Function.prototype.p = function() {
+    var args = _.toArray(arguments)
+    var f = this
+    return function() {
+        var inner_args = _.toArray(arguments)
+        inner_args.unshift(args[0])
+        return f.apply(this, inner_args)
+    }
+}
+
+Function.prototype.f = function() {
+    var f = this
+    return function() {
+        var args = _.toArray(arguments).reverse()
+        return f.apply(this, args)
+    }
+}
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8')
